@@ -1,31 +1,28 @@
 "use client";
 import { useState, FormEvent, ChangeEvent, useEffect } from "react";
-import {
-  FormControl,
-  TextField,
-  Button,
-  Stack,
-  Box,
-  Typography,
-} from "@mui/material";
+import { FormControl, TextField, Button, Stack, Box } from "@mui/material";
 import { postChat } from "@/modules/chat/postChat";
-import Markdown from "react-markdown";
 import { ChatMessage } from "@/modules/chat/interface";
+import { BotArea } from "@/components/TwoBots/components/BotArea/BotArea";
 
 enum Bots {
   Bot1 = "user1",
   Bot2 = "user2",
 }
 
-const MAX_NUMBER_OF_MESSAGES = 10;
-const NUMBER_OF_CHARS_READ_PER_SECOND = 30;
+const MAX_NUMBER_OF_MESSAGES = 15;
+const NUMBER_OF_CHARS_READ_PER_SECOND = 33;
 
 export const TwoBots = () => {
+  // get query param first-message
+  const firstMessage = decodeURIComponent(
+    new URLSearchParams(window.location.search).get("first-message") ?? ""
+  );
   const [playingState, setPlayingState] = useState<"stop" | "start" | "pause">(
     "stop"
   );
   const [numberOfMessages, setNumberOfMessages] = useState(0);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(firstMessage);
   const [bot1Message, setBot1Message] = useState("");
   const [bot2Message, setBot2Message] = useState("");
   const [activeBot, setActiveBot] = useState<Bots>(Bots.Bot1);
@@ -90,48 +87,52 @@ export const TwoBots = () => {
   }, [activeBot, playingState]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl>
-        <Stack spacing={2} direction="row">
-          <TextField
-            label="First message"
-            variant="outlined"
-            placeholder="Enter the first message"
-            value={inputValue}
-            onChange={handleChange}
+    <Box sx={{ paddingY: 2 }}>
+      <form onSubmit={handleSubmit}>
+        <FormControl>
+          <Stack spacing={2} direction="column">
+            <TextField
+              label="First message"
+              multiline
+              rows={4}
+              sx={{ width: 300 }}
+              variant="outlined"
+              placeholder="Enter the first message"
+              value={inputValue}
+              onChange={handleChange}
+            />
+            <Box>
+              <Button
+                disabled={inputValue === ""}
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                {getSubmitButtonLabel(playingState)}
+              </Button>
+            </Box>
+          </Stack>
+        </FormControl>
+        <Stack
+          spacing={2}
+          direction="row"
+          sx={{
+            paddingY: 2,
+          }}
+        >
+          <BotArea
+            botMessage={bot1Message}
+            botName="Purple bot"
+            imageSrc="/bot1.png"
           />
-          <Button
-            disabled={inputValue === ""}
-            type="submit"
-            variant="contained"
-            color="primary"
-          >
-            {getSubmitButtonLabel(playingState)}
-          </Button>
+          <BotArea
+            botMessage={bot2Message}
+            botName="Cyan bot"
+            imageSrc="/bot2.png"
+          />
         </Stack>
-      </FormControl>
-      <Stack
-        spacing={2}
-        direction="row"
-        justifyContent="space-between"
-        sx={{
-          paddingY: 2,
-        }}
-      >
-        <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-          <Typography variant="h6">Bot 1</Typography>
-          <Typography component="div">
-            <Markdown>{bot1Message}</Markdown>
-          </Typography>
-        </Box>
-        <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-          <Typography variant="h6">Bot 2</Typography>
-          <Typography component="div">
-            <Markdown>{bot2Message}</Markdown>
-          </Typography>
-        </Box>
-      </Stack>
-    </form>
+      </form>
+    </Box>
   );
 };
 
