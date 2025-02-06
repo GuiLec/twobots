@@ -10,10 +10,11 @@ import {
 } from "@mui/material";
 import { postChat } from "@/modules/chat/postChat";
 import Markdown from "react-markdown";
+import { ChatMessage } from "@/modules/chat/interface";
 
 enum Bots {
-  Bot1 = 1,
-  Bot2 = 2,
+  Bot1 = "user1",
+  Bot2 = "user2",
 }
 
 const MAX_NUMBER_OF_MESSAGES = 10;
@@ -28,50 +29,53 @@ export const TwoBots = () => {
   const [bot1Message, setBot1Message] = useState("");
   const [bot2Message, setBot2Message] = useState("");
   const [activeBot, setActiveBot] = useState<Bots>(Bots.Bot1);
+  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
 
-  const fetchAnswer = async (prompt: string) => {
+  const resetGame = () => {
+    setPlayingState("stop");
+    setBot1Message("");
+    setBot2Message("");
+    setActiveBot(Bots.Bot1);
+    setNumberOfMessages(0);
+    setInputValue("");
+    setChatHistory([]);
+  };
+
+  const fetchAnswer = async () => {
     if (numberOfMessages < MAX_NUMBER_OF_MESSAGES) {
-      const answer = await postChat({ prompt });
+      const answer = await postChat({ chatHistory });
       const message = answer.response.result;
       if (activeBot === Bots.Bot1) {
         setBot2Message(message);
+        setChatHistory([...chatHistory, { text: message, user: Bots.Bot2 }]);
         setBot1Message("");
         await delay((1000 * message.length) / NUMBER_OF_CHARS_READ_PER_SECOND);
         setActiveBot(Bots.Bot2);
       } else {
         setBot1Message(message);
+        setChatHistory([...chatHistory, { text: message, user: Bots.Bot1 }]);
         setBot2Message("");
         await delay((1000 * message.length) / NUMBER_OF_CHARS_READ_PER_SECOND);
         setActiveBot(Bots.Bot1);
       }
       setNumberOfMessages(numberOfMessages + 1);
     } else {
-      setPlayingState("stop");
-      setBot1Message("");
-      setBot2Message("");
-      setActiveBot(Bots.Bot1);
-      setNumberOfMessages(0);
-      setInputValue("");
+      resetGame();
     }
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (playingState === "stop") {
-      setPlayingState("start");
       setBot1Message(inputValue);
-      fetchAnswer(inputValue);
+      setChatHistory([...chatHistory, { text: inputValue, user: Bots.Bot1 }]);
+      setPlayingState("start");
     } else if (playingState === "start") {
       setPlayingState("pause");
 
       setNumberOfMessages(MAX_NUMBER_OF_MESSAGES);
     } else {
-      setPlayingState("stop");
-      setBot1Message("");
-      setBot2Message("");
-      setActiveBot(Bots.Bot1);
-      setNumberOfMessages(0);
-      setInputValue("");
+      resetGame();
     }
   };
 
@@ -81,8 +85,7 @@ export const TwoBots = () => {
 
   useEffect(() => {
     if (playingState === "start") {
-      const prompt = activeBot === Bots.Bot1 ? bot1Message : bot2Message;
-      fetchAnswer(prompt);
+      fetchAnswer();
     }
   }, [activeBot, playingState]);
 
