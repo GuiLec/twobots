@@ -1,17 +1,9 @@
 "use client";
 import { useState, FormEvent, ChangeEvent, useEffect } from "react";
-import {
-  FormControl,
-  TextField,
-  Button,
-  Stack,
-  Box,
-  Typography,
-} from "@mui/material";
+import { FormControl, TextField, Button, Stack, Box } from "@mui/material";
 import { postChat } from "@/modules/chat/postChat";
-import Markdown from "react-markdown";
 import { ChatMessage } from "@/modules/chat/interface";
-import styles from "./TwoBots.module.css";
+import { BotArea } from "@/components/TwoBots/components/BotArea/BotArea";
 
 enum Bots {
   Bot1 = "user1",
@@ -125,30 +117,16 @@ export const TwoBots = () => {
             paddingY: 2,
           }}
         >
-          <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-            <img src="/bot1.png" alt="bot1" className={styles.botImage} />
-            <Typography
-              variant="h6"
-              sx={{ fontWeight: "bold", color: "primary.main", paddingY: 1 }}
-            >
-              Purple bot
-            </Typography>
-            <Typography component="div">
-              <Markdown>{bot1Message}</Markdown>
-            </Typography>
-          </Box>
-          <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-            <img src="/bot2.png" alt="bot2" className={styles.botImage} />
-            <Typography
-              variant="h6"
-              sx={{ fontWeight: "bold", color: "primary.main", paddingY: 1 }}
-            >
-              Cyan bot
-            </Typography>
-            <Typography component="div">
-              <Markdown>{bot2Message}</Markdown>
-            </Typography>
-          </Box>
+          <BotArea
+            botMessage={bot1Message}
+            botName="Purple bot"
+            imageSrc="/bot1.png"
+          />
+          <BotArea
+            botMessage={bot2Message}
+            botName="Cyan bot"
+            imageSrc="/bot2.png"
+          />
         </Stack>
       </form>
     </Box>
