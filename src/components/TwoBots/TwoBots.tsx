@@ -4,7 +4,6 @@ import { FormControl, TextField, Button, Stack, Box } from "@mui/material";
 import { postChat } from "@/modules/chat/postChat";
 import { ChatMessage } from "@/modules/chat/interface";
 import { BotArea } from "@/components/TwoBots/components/BotArea/BotArea";
-import { useSearchParams } from "next/navigation";
 
 enum Bots {
   Bot1 = "user1",
@@ -15,14 +14,11 @@ const MAX_NUMBER_OF_MESSAGES = 15;
 const NUMBER_OF_CHARS_READ_PER_SECOND = 33;
 
 export const TwoBots = () => {
-  const searchParams = useSearchParams();
-
-  const firstMessage = searchParams.get("first-message") || "";
   const [playingState, setPlayingState] = useState<"stop" | "start" | "pause">(
     "stop"
   );
   const [numberOfMessages, setNumberOfMessages] = useState(0);
-  const [inputValue, setInputValue] = useState(firstMessage);
+  const [inputValue, setInputValue] = useState("");
   const [bot1Message, setBot1Message] = useState("");
   const [bot2Message, setBot2Message] = useState("");
   const [activeBot, setActiveBot] = useState<Bots>(Bots.Bot1);
@@ -85,6 +81,13 @@ export const TwoBots = () => {
       fetchAnswer();
     }
   }, [activeBot, playingState]);
+
+  useEffect(() => {
+    const firstMessage = decodeURIComponent(
+      new URLSearchParams(window.location.search).get("first-message") ?? ""
+    );
+    setInputValue(firstMessage);
+  }, []);
 
   return (
     <Box sx={{ paddingY: 2 }}>
