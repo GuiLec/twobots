@@ -86,7 +86,7 @@ export const TwoBots = () => {
     <Box sx={{ paddingY: 2 }}>
       <form onSubmit={handleSubmit}>
         <FormControl>
-          <Stack spacing={2} direction="row">
+          <Stack spacing={2} direction="column">
             <TextField
               label="First message"
               multiline
@@ -112,7 +112,6 @@ export const TwoBots = () => {
         <Stack
           spacing={2}
           direction="row"
-          justifyContent="space-between"
           sx={{
             paddingY: 2,
           }}
