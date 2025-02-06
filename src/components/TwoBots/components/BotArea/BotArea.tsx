@@ -18,7 +18,16 @@ export const BotArea = ({ botMessage, botName, imageSrc }: BotAreaProps) => {
       >
         {botName}
       </Typography>
-      <Typography component="div">
+      <Typography
+        component="div"
+        sx={{
+          border: 1,
+          borderColor: "grey.300",
+          borderRadius: 2,
+          minHeight: 200,
+          padding: 2,
+        }}
+      >
         <Markdown>{botMessage}</Markdown>
       </Typography>
     </Box>
