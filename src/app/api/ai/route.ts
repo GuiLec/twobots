@@ -11,8 +11,10 @@ export async function POST(request: Request) {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-    const result = await model.generateContent(prompt);
-    console.log(result.response.text());
+    const data = await model.generateContent(prompt);
+    const candidates = data.response.candidates ?? [];
+    const result = candidates[0].content.parts[0].text;
+
     return NextResponse.json({ response: { result } }, { status: 200 });
   } catch (error) {
     console.log("🚀 ~ POST ~ error:", error);
