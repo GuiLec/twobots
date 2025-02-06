@@ -91,65 +91,67 @@ export const TwoBots = () => {
   }, [activeBot, playingState]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl>
-        <Stack spacing={2} direction="row">
-          <TextField
-            label="First message"
-            multiline
-            rows={4}
-            sx={{ width: 300 }}
-            variant="outlined"
-            placeholder="Enter the first message"
-            value={inputValue}
-            onChange={handleChange}
-          />
-          <Box>
-            <Button
-              disabled={inputValue === ""}
-              type="submit"
-              variant="contained"
-              color="primary"
+    <Box sx={{ paddingY: 2 }}>
+      <form onSubmit={handleSubmit}>
+        <FormControl>
+          <Stack spacing={2} direction="row">
+            <TextField
+              label="First message"
+              multiline
+              rows={4}
+              sx={{ width: 300 }}
+              variant="outlined"
+              placeholder="Enter the first message"
+              value={inputValue}
+              onChange={handleChange}
+            />
+            <Box>
+              <Button
+                disabled={inputValue === ""}
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                {getSubmitButtonLabel(playingState)}
+              </Button>
+            </Box>
+          </Stack>
+        </FormControl>
+        <Stack
+          spacing={2}
+          direction="row"
+          justifyContent="space-between"
+          sx={{
+            paddingY: 2,
+          }}
+        >
+          <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
+            <img src="/bot1.png" alt="bot1" className={styles.botImage} />
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: "bold", color: "primary.main", paddingY: 1 }}
             >
-              {getSubmitButtonLabel(playingState)}
-            </Button>
+              Purple bot
+            </Typography>
+            <Typography component="div">
+              <Markdown>{bot1Message}</Markdown>
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
+            <img src="/bot2.png" alt="bot2" className={styles.botImage} />
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: "bold", color: "primary.main", paddingY: 1 }}
+            >
+              Cyan bot
+            </Typography>
+            <Typography component="div">
+              <Markdown>{bot2Message}</Markdown>
+            </Typography>
           </Box>
         </Stack>
-      </FormControl>
-      <Stack
-        spacing={2}
-        direction="row"
-        justifyContent="space-between"
-        sx={{
-          paddingY: 2,
-        }}
-      >
-        <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-          <img src="/bot1.png" alt="bot1" className={styles.botImage} />
-          <Typography
-            variant="h6"
-            sx={{ fontWeight: "bold", color: "primary.main", paddingY: 1 }}
-          >
-            Purple bot
-          </Typography>
-          <Typography component="div">
-            <Markdown>{bot1Message}</Markdown>
-          </Typography>
-        </Box>
-        <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-          <img src="/bot2.png" alt="bot2" className={styles.botImage} />
-          <Typography
-            variant="h6"
-            sx={{ fontWeight: "bold", color: "primary.main", paddingY: 1 }}
-          >
-            Cyan bot
-          </Typography>
-          <Typography component="div">
-            <Markdown>{bot2Message}</Markdown>
-          </Typography>
-        </Box>
-      </Stack>
-    </form>
+      </form>
+    </Box>
   );
 };
 
