@@ -17,6 +17,7 @@ enum Bots {
 }
 
 const MAX_NUMBER_OF_MESSAGES = 10;
+const NUMBER_OF_CHARS_READ_PER_SECOND = 30;
 
 export const TwoBots = () => {
   const [playingState, setPlayingState] = useState<"stop" | "start" | "pause">(
@@ -31,14 +32,26 @@ export const TwoBots = () => {
   const fetchAnswer = async (prompt: string) => {
     if (numberOfMessages < MAX_NUMBER_OF_MESSAGES) {
       const answer = await postChat({ prompt });
+      const message = answer.response.result;
       if (activeBot === Bots.Bot1) {
-        setBot2Message(answer.response.result);
+        setBot2Message(message);
+        setBot1Message("");
+        await delay((1000 * message.length) / NUMBER_OF_CHARS_READ_PER_SECOND);
         setActiveBot(Bots.Bot2);
       } else {
-        setBot1Message(answer.response.result);
+        setBot1Message(message);
+        setBot2Message("");
+        await delay((1000 * message.length) / NUMBER_OF_CHARS_READ_PER_SECOND);
         setActiveBot(Bots.Bot1);
       }
       setNumberOfMessages(numberOfMessages + 1);
+    } else {
+      setPlayingState("stop");
+      setBot1Message("");
+      setBot2Message("");
+      setActiveBot(Bots.Bot1);
+      setNumberOfMessages(0);
+      setInputValue("");
     }
   };
 
@@ -129,3 +142,5 @@ const getSubmitButtonLabel = (playingState: string) => {
       return "Refresh";
   }
 };
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

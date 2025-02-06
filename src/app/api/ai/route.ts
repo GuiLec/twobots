@@ -1,16 +1,15 @@
+import { instructions } from "@/modules/chat/intructions";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
 const apiKey = process.env.GEMINI_SECRET_KEY;
 const genAI = new GoogleGenerativeAI(apiKey ?? "");
 
-const instructions = "Always start your answers by Yo Yo";
-
 const model = genAI.getGenerativeModel({
   model: "gemini-2.0-flash",
-  generationConfig: {
-    maxOutputTokens: 100,
-  },
+  // generationConfig: {
+  //   maxOutputTokens: 20,
+  // },
   systemInstruction: instructions,
 });
 
