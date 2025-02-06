@@ -4,6 +4,7 @@ import { FormControl, TextField, Button, Stack, Box } from "@mui/material";
 import { postChat } from "@/modules/chat/postChat";
 import { ChatMessage } from "@/modules/chat/interface";
 import { BotArea } from "@/components/TwoBots/components/BotArea/BotArea";
+import { useSearchParams } from "next/navigation";
 
 enum Bots {
   Bot1 = "user1",
@@ -14,10 +15,9 @@ const MAX_NUMBER_OF_MESSAGES = 15;
 const NUMBER_OF_CHARS_READ_PER_SECOND = 33;
 
 export const TwoBots = () => {
-  // get query param first-message
-  const firstMessage = decodeURIComponent(
-    new URLSearchParams(window.location.search).get("first-message") ?? ""
-  );
+  const searchParams = useSearchParams();
+
+  const firstMessage = searchParams.get("first-message") || "";
   const [playingState, setPlayingState] = useState<"stop" | "start" | "pause">(
     "stop"
   );
