@@ -17,8 +17,8 @@ enum Bots {
   Bot2 = "user2",
 }
 
-const MAX_NUMBER_OF_MESSAGES = 10;
-const NUMBER_OF_CHARS_READ_PER_SECOND = 30;
+const MAX_NUMBER_OF_MESSAGES = 15;
+const NUMBER_OF_CHARS_READ_PER_SECOND = 33;
 
 export const TwoBots = () => {
   const [playingState, setPlayingState] = useState<"stop" | "start" | "pause">(
