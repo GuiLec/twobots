@@ -4,7 +4,7 @@ import { Container } from "@mui/material";
 export default function Home() {
   return (
     <main>
-      <Container>
+      <Container sx={{ paddingY: 4 }}>
         <TwoBots />
       </Container>
     </main>
