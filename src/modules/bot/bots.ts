@@ -18,24 +18,28 @@ export const bots: Record<Bots, Bot> = {
 export const personalityOptions = [
   { value: "", label: "" },
   {
-    value: "friendly",
-    label: "Friendly",
+    value: "funny",
+    label: "🤡 Funny",
   },
   {
     value: "serious",
-    label: "Serious",
+    label: "😐 Serious",
   },
   {
-    value: "funny",
-    label: "Funny",
+    value: "exentric",
+    label: "🥸 Exentric",
   },
   {
-    value: "analytical",
-    label: "Analytical",
+    value: "crazy",
+    label: "🤪 Crazy",
   },
   {
-    value: "creative",
-    label: "Creative",
+    value: "optimistic",
+    label: "🤗 Optimistic",
+  },
+  {
+    value: "pessimistic",
+    label: "🫣 Pessimistic",
   },
 ];
 
@@ -43,22 +47,22 @@ export const moodOptions = [
   { value: "", label: "" },
   {
     value: "happy",
-    label: "Happy",
+    label: "😊 Happy",
   },
   {
     value: "sad",
-    label: "Sad",
+    label: "😞 Sad",
   },
   {
     value: "angry",
-    label: "Angry",
+    label: "😡 Angry",
   },
   {
     value: "excited",
-    label: "Excited",
+    label: "🥳 Excited",
   },
   {
     value: "bored",
-    label: "Bored",
+    label: "😒 Bored",
   },
 ];
