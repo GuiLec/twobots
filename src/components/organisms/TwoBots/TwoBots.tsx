@@ -3,7 +3,7 @@ import { useState, FormEvent, ChangeEvent, useEffect } from "react";
 import { FormControl, TextField, Button, Stack, Box } from "@mui/material";
 import { postChat } from "@/modules/chat/postChat";
 import { ChatMessage } from "@/modules/chat/interface";
-import { BotArea } from "@/components/TwoBots/components/BotArea/BotArea";
+import { BotArea } from "@/components/organisms/TwoBots/components/BotArea/BotArea";
 
 enum Bots {
   Bot1 = "user1",

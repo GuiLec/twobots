@@ -3,7 +3,7 @@ import styles from "./BotArea.module.css";
 import Markdown from "react-markdown";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
-import { BotSettingsModal } from "@/components/TwoBots/components/BotSettingsModal/BotSettingsModal";
+import { BotSettingsModal } from "@/components/organisms/TwoBots/components/BotSettingsModal/BotSettingsModal";
 
 interface BotAreaProps {
   botMessage: string;
