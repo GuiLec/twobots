@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Two bots",
+  title: "Two Bots",
   description:
     "Two bots is a fun game where you init a discussion between two robots and see what happens.",
 };
@@ -40,6 +40,7 @@ export default async function RootLayout({
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
