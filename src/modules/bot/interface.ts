@@ -7,4 +7,5 @@ export interface Bot {
   name: string;
   personality: string;
   mood: string;
+  somethingToKnowAbout: string;
 }

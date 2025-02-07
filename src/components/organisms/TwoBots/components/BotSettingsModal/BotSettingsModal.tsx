@@ -7,6 +7,7 @@ import {
   FormControl,
   Modal,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -27,9 +28,11 @@ export const BotSettingsModal = ({
   const [settings, setSettings] = useState<{
     personality: string;
     mood: string;
+    somethingToKnowAbout: string;
   }>({
     personality: "",
     mood: "",
+    somethingToKnowAbout: "",
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -38,6 +41,7 @@ export const BotSettingsModal = ({
       ...bot,
       personality: settings.personality,
       mood: settings.mood,
+      somethingToKnowAbout: settings.somethingToKnowAbout,
     });
     handleClose();
   };
@@ -48,6 +52,10 @@ export const BotSettingsModal = ({
 
   const updateMood = (e: ChangeEvent<HTMLInputElement>) => {
     setSettings({ ...settings, mood: e.target.value });
+  };
+
+  const updateSomethingToKnowAbout = (e: ChangeEvent<HTMLInputElement>) => {
+    setSettings({ ...settings, somethingToKnowAbout: e.target.value });
   };
 
   return (
@@ -91,6 +99,16 @@ export const BotSettingsModal = ({
                 value={settings.mood}
                 onChange={updateMood}
                 label="Mood"
+              />
+              <TextField
+                label={`Something to know about ${bot.name}`}
+                multiline
+                rows={3}
+                sx={{ width: [300, 400, 500] }}
+                variant="outlined"
+                placeholder={`Something to know about ${bot.name}`}
+                value={settings.somethingToKnowAbout}
+                onChange={updateSomethingToKnowAbout}
               />
               <Button
                 type="submit"

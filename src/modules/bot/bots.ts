@@ -1,8 +1,18 @@
 import { Bot, Bots } from "@/modules/bot/interface";
 
 export const bots: Record<Bots, Bot> = {
-  [Bots.Bot1]: { name: "Purple Bot", personality: "", mood: "" },
-  [Bots.Bot2]: { name: "Cyan Bot", personality: "", mood: "" },
+  [Bots.Bot1]: {
+    name: "Purple Bot",
+    personality: "",
+    mood: "",
+    somethingToKnowAbout: "",
+  },
+  [Bots.Bot2]: {
+    name: "Cyan Bot",
+    personality: "",
+    mood: "",
+    somethingToKnowAbout: "",
+  },
 };
 
 export const personalityOptions = [

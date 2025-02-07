@@ -12,11 +12,19 @@ export const postChat = async ({
   bot2: Bot;
 }) => {
   const speakerBot = chatHistory[chatHistory.length - 1]?.user;
-  const { mood, personality } = speakerBot === Bots.Bot1 ? bot2 : bot1;
+  const { mood, personality, somethingToKnowAbout } =
+    speakerBot === Bots.Bot1 ? bot2 : bot1;
 
   const systemInstruction =
-    `In the conversation use a ${mood} mood and a ${personality} personality.` +
-    instructions;
+    `Your character is defined like this:
+     ${mood !== "" ? `- your mood is ${mood}` : ""}
+     ${personality !== "" ? `- your personality is ${personality}` : ""}
+     ${
+       somethingToKnowAbout !== ""
+         ? `- this sentence applies well to you: ${somethingToKnowAbout}`
+         : ""
+     }
+     ` + instructions;
 
   const response = await fetch("/api/ai", {
     method: "POST",
