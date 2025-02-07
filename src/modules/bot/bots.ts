@@ -14,55 +14,54 @@ export const bots: Record<Bots, Bot> = {
     somethingToKnowAbout: "",
   },
 };
-
 export const personalityOptions = [
-  { value: "", label: "" },
+  { value: "", key: "personalityOptions.empty" },
   {
     value: "funny",
-    label: "🤡 Funny",
+    key: "personalityOptions.funny",
   },
   {
     value: "serious",
-    label: "😐 Serious",
+    key: "personalityOptions.serious",
   },
   {
     value: "exentric",
-    label: "🥸 Exentric",
+    key: "personalityOptions.exentric",
   },
   {
     value: "crazy",
-    label: "🤪 Crazy",
+    key: "personalityOptions.crazy",
   },
   {
     value: "optimistic",
-    label: "🤗 Optimistic",
+    key: "personalityOptions.optimistic",
   },
   {
     value: "pessimistic",
-    label: "🫣 Pessimistic",
+    key: "personalityOptions.pessimistic",
   },
 ];
 
 export const moodOptions = [
-  { value: "", label: "" },
+  { value: "", key: "moodOptions.empty" },
   {
     value: "happy",
-    label: "😊 Happy",
+    key: "moodOptions.happy",
   },
   {
     value: "sad",
-    label: "😞 Sad",
+    key: "moodOptions.sad",
   },
   {
     value: "angry",
-    label: "😡 Angry",
+    key: "moodOptions.angry",
   },
   {
     value: "excited",
-    label: "🥳 Excited",
+    key: "moodOptions.excited",
   },
   {
     value: "bored",
-    label: "😒 Bored",
+    key: "moodOptions.bored",
   },
 ];

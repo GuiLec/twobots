@@ -1,4 +1,43 @@
 {
-  "hello": "Hello",
-  "welcome": "Welcome"
+  "home": {
+    "intro": {
+      "purpleBot": "Purple bot",
+      "cyanBot": "Cyan bot",
+      "messagePart1": " and ",
+      "messagePart2": " want to chat. Init the conversation and see what happens!"
+    },
+    "twoBots": {
+      "firstMessage": "First message",
+      "enterFirstMessage": "Enter the first message",
+      "settingsModal": {
+        "intro": {
+          "part1": "Here you can define ",
+          "part2": "'s character."
+        },
+        "personality": "Personality",
+        "mood": "Mood",
+        "somethingToKnowAbout": "Something to know about ",
+        "save": "Save"
+      }
+    }
+  },
+  "bots": {
+    "personalityOptions": {
+      "empty": "",
+      "funny": "🤡 Funny",
+      "serious": "😐 Serious",
+      "exentric": "🥸 Exentric",
+      "crazy": "🤪 Crazy",
+      "optimistic": "🤗 Optimistic",
+      "pessimistic": "🫣 Pessimistic"
+    },
+    "moodOptions": {
+      "empty": "",
+      "happy": "😊 Happy",
+      "sad": "😞 Sad",
+      "angry": "😡 Angry",
+      "excited": "🥳 Excited",
+      "bored": "😒 Bored"
+    }
+  }
 }

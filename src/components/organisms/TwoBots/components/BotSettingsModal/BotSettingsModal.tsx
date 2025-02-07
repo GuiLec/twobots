@@ -10,6 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useTranslations } from "next-intl";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 interface BotSettingsModalProps {
@@ -25,6 +26,9 @@ export const BotSettingsModal = ({
   bot,
   updateBot,
 }: BotSettingsModalProps) => {
+  const t = useTranslations("home.twoBots.settingsModal");
+  const t2 = useTranslations("bots");
+
   const [settings, setSettings] = useState<{
     personality: string;
     mood: string;
@@ -81,32 +85,38 @@ export const BotSettingsModal = ({
           {bot.name}
         </Typography>
         <Typography id="modal-description" sx={{ my: 1 }}>
-          {`Here you can define `}
+          {t("intro.part1")}
           <strong>{bot.name}</strong>
-          {`'s character.`}
+          {t("intro.part2")}
         </Typography>
         <form onSubmit={handleSubmit}>
           <FormControl variant="outlined">
             <Stack spacing={2} direction="column">
               <MultiSelect
-                options={personalityOptions}
+                options={personalityOptions.map((personality) => ({
+                  value: personality.value,
+                  label: t2(personality.key),
+                }))}
                 value={settings.personality}
                 onChange={updatePersonality}
-                label="Personality"
+                label={t("personality")}
               />
               <MultiSelect
-                options={moodOptions}
+                options={moodOptions.map((mood) => ({
+                  value: mood.value,
+                  label: t2(mood.key),
+                }))}
                 value={settings.mood}
                 onChange={updateMood}
-                label="Mood"
+                label={t("mood")}
               />
               <TextField
-                label={`Something to know about ${bot.name}`}
+                label={`${t("somethingToKnowAbout")}${bot.name}`}
                 multiline
                 rows={3}
                 sx={{ width: [300, 400, 500] }}
                 variant="outlined"
-                placeholder={`Something to know about ${bot.name}`}
+                placeholder={`${t("somethingToKnowAbout")}${bot.name}`}
                 value={settings.somethingToKnowAbout}
                 onChange={updateSomethingToKnowAbout}
               />

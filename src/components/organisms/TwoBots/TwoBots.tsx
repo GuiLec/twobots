@@ -6,11 +6,14 @@ import { ChatMessage } from "@/modules/chat/interface";
 import { BotArea } from "@/components/organisms/TwoBots/components/BotArea/BotArea";
 import { Bot, Bots } from "@/modules/bot/interface";
 import { bots } from "@/modules/bot/bots";
+import { useTranslations } from "next-intl";
 
 const MAX_NUMBER_OF_MESSAGES = 15;
 const NUMBER_OF_CHARS_READ_PER_SECOND = 33;
 
 export const TwoBots = () => {
+  const t = useTranslations("home.twoBots");
+
   const [playingState, setPlayingState] = useState<"stop" | "start" | "pause">(
     "stop"
   );
@@ -94,12 +97,12 @@ export const TwoBots = () => {
         <FormControl>
           <Stack spacing={2} direction="column">
             <TextField
-              label="First message"
+              label={t("firstMessage")}
               multiline
               rows={4}
               sx={{ width: 300 }}
               variant="outlined"
-              placeholder="Enter the first message"
+              placeholder={t("enterFirstMessage")}
               value={inputValue}
               onChange={handleChange}
             />
