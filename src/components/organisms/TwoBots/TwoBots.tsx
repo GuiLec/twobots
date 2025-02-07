@@ -35,7 +35,7 @@ export const TwoBots = () => {
 
   const fetchAnswer = async () => {
     if (numberOfMessages < MAX_NUMBER_OF_MESSAGES) {
-      const answer = await postChat({ chatHistory });
+      const answer = await postChat({ chatHistory, bot1, bot2 });
       const message = answer.response.result;
       if (activeBot === Bots.Bot1) {
         setBot2Message(message);
