@@ -6,4 +6,5 @@ export enum Bots {
 export interface Bot {
   name: string;
   personality: string;
+  mood: string;
 }

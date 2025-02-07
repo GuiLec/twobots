@@ -1,5 +1,5 @@
 import { MultiSelect } from "@/components/atoms/MultiSelect/MutltiSelect";
-import { personalityOptions } from "@/modules/bot/bots";
+import { moodOptions, personalityOptions } from "@/modules/bot/bots";
 import { Bot } from "@/modules/bot/interface";
 import {
   Box,
@@ -26,19 +26,30 @@ export const BotSettingsModal = ({
 }: BotSettingsModalProps) => {
   const [settings, setSettings] = useState<{
     personality: string;
+    mood: string;
   }>({
     personality: "",
+    mood: "",
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateBot({ ...bot, personality: settings.personality });
+    updateBot({
+      ...bot,
+      personality: settings.personality,
+      mood: settings.mood,
+    });
     handleClose();
   };
 
   const updatePersonality = (e: ChangeEvent<HTMLInputElement>) => {
     setSettings({ ...settings, personality: e.target.value });
   };
+
+  const updateMood = (e: ChangeEvent<HTMLInputElement>) => {
+    setSettings({ ...settings, mood: e.target.value });
+  };
+
   return (
     <Modal open={open} onClose={handleClose}>
       <Box
@@ -74,6 +85,12 @@ export const BotSettingsModal = ({
                 value={settings.personality}
                 onChange={updatePersonality}
                 label="Personality"
+              />
+              <MultiSelect
+                options={moodOptions}
+                value={settings.mood}
+                onChange={updateMood}
+                label="Mood"
               />
               <Button type="submit" variant="contained" color="primary">
                 Save
