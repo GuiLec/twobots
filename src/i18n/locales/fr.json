@@ -1,0 +1,41 @@
+{
+  "home": {
+    "intro": {
+      "messagePart1": " et ",
+      "messagePart2": " veulent discuter. Initiez la conversation et voyez ce qu'il se passe !"
+    },
+    "twoBots": {
+      "firstMessage": "Premier message",
+      "enterFirstMessage": "Entrez le premier message",
+      "settingsModal": {
+        "intro": {
+          "part1": "Ici, vous pouvez définir le caractère de ",
+          "part2": "."
+        },
+        "personality": "Personnalité",
+        "mood": "Humeur",
+        "somethingToKnowAbout": "Quelque chose à savoir sur ",
+        "save": "Enregistrer"
+      }
+    }
+  },
+  "bots": {
+    "personalityOptions": {
+      "empty": "",
+      "funny": "🤡 Drôle",
+      "serious": "😐 Sérieux",
+      "exentric": "🥸 Excentrique",
+      "crazy": "🤪 Fou",
+      "optimistic": "🤗 Optimiste",
+      "pessimistic": "🫣 Pessimiste"
+    },
+    "moodOptions": {
+      "empty": "",
+      "happy": "😊 Heureux",
+      "sad": "😞 Triste",
+      "angry": "😡 En colère",
+      "excited": "🥳 Excité",
+      "bored": "😒 Ennuyé"
+    }
+  }
+}

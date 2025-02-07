@@ -5,6 +5,7 @@ interface MultiSelectProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label: string;
   options: { value: string; label: string }[];
+  width?: number;
 }
 
 export const MultiSelect = ({
@@ -12,10 +13,11 @@ export const MultiSelect = ({
   onChange,
   label,
   options,
+  width = 250,
 }: MultiSelectProps) => {
   return (
     <TextField
-      style={{ width: 250 }}
+      style={{ width }}
       variant="outlined"
       value={value}
       onChange={onChange}
