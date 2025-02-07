@@ -1,4 +1,4 @@
-import { TwoBots } from "@/components/TwoBots/TwoBots";
+import { TwoBots } from "@/components/organisms/TwoBots/TwoBots";
 import { Container, Typography } from "@mui/material";
 
 export default function Home() {

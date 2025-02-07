@@ -3,12 +3,9 @@ import { useState, FormEvent, ChangeEvent, useEffect } from "react";
 import { FormControl, TextField, Button, Stack, Box } from "@mui/material";
 import { postChat } from "@/modules/chat/postChat";
 import { ChatMessage } from "@/modules/chat/interface";
-import { BotArea } from "@/components/TwoBots/components/BotArea/BotArea";
-
-enum Bots {
-  Bot1 = "user1",
-  Bot2 = "user2",
-}
+import { BotArea } from "@/components/organisms/TwoBots/components/BotArea/BotArea";
+import { Bot, Bots } from "@/modules/bot/interface";
+import { bots } from "@/modules/bot/bots";
 
 const MAX_NUMBER_OF_MESSAGES = 15;
 const NUMBER_OF_CHARS_READ_PER_SECOND = 33;
@@ -23,6 +20,8 @@ export const TwoBots = () => {
   const [bot2Message, setBot2Message] = useState("");
   const [activeBot, setActiveBot] = useState<Bots>(Bots.Bot1);
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+  const [bot1, setBot1] = useState<Bot>(bots[Bots.Bot1]);
+  const [bot2, setBot2] = useState<Bot>(bots[Bots.Bot2]);
 
   const resetGame = () => {
     setPlayingState("stop");
@@ -36,7 +35,7 @@ export const TwoBots = () => {
 
   const fetchAnswer = async () => {
     if (numberOfMessages < MAX_NUMBER_OF_MESSAGES) {
-      const answer = await postChat({ chatHistory });
+      const answer = await postChat({ chatHistory, bot1, bot2 });
       const message = answer.response.result;
       if (activeBot === Bots.Bot1) {
         setBot2Message(message);
@@ -106,7 +105,7 @@ export const TwoBots = () => {
             />
             <Box>
               <Button
-                disabled={inputValue === ""}
+                disabled={inputValue === "" && playingState === "stop"}
                 type="submit"
                 variant="contained"
                 color="primary"
@@ -116,25 +115,27 @@ export const TwoBots = () => {
             </Box>
           </Stack>
         </FormControl>
-        <Stack
-          spacing={2}
-          direction="row"
-          sx={{
-            paddingY: 2,
-          }}
-        >
-          <BotArea
-            botMessage={bot1Message}
-            botName="Purple bot"
-            imageSrc="/bot1.png"
-          />
-          <BotArea
-            botMessage={bot2Message}
-            botName="Cyan bot"
-            imageSrc="/bot2.png"
-          />
-        </Stack>
       </form>
+      <Stack
+        spacing={2}
+        direction="row"
+        sx={{
+          paddingY: 2,
+        }}
+      >
+        <BotArea
+          botMessage={bot1Message}
+          bot={bot1}
+          imageSrc="/bot1.png"
+          updateBot={setBot1}
+        />
+        <BotArea
+          botMessage={bot2Message}
+          bot={bot2}
+          imageSrc="/bot2.png"
+          updateBot={setBot2}
+        />
+      </Stack>
     </Box>
   );
 };
