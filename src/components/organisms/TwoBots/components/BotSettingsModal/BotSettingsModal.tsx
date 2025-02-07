@@ -1,13 +1,10 @@
+import { MultiSelect } from "@/components/atoms/MultiSelect/MutltiSelect";
 import {
   Box,
   Button,
   FormControl,
-  InputLabel,
-  MenuItem,
   Modal,
-  Select,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 
@@ -52,21 +49,15 @@ export const BotSettingsModal = ({
         <form>
           <FormControl variant="outlined">
             <Stack spacing={2} direction="column">
-              <TextField
-                style={{ width: "100%" }}
-                variant="outlined"
+              <MultiSelect
+                options={[
+                  { value: "test", label: "Test 1" },
+                  { value: "test2", label: "Test 2" },
+                ]}
                 value="test"
                 onChange={(e) => console.log(e.target.value)}
-                select
                 label="Label"
-              >
-                <MenuItem key={1} value="test">
-                  Test 1
-                </MenuItem>
-                <MenuItem key={2} value="test2">
-                  Test 2
-                </MenuItem>
-              </TextField>
+              />
               <Button
                 type="submit"
                 variant="contained"
