@@ -4,11 +4,7 @@ import { FormControl, TextField, Button, Stack, Box } from "@mui/material";
 import { postChat } from "@/modules/chat/postChat";
 import { ChatMessage } from "@/modules/chat/interface";
 import { BotArea } from "@/components/organisms/TwoBots/components/BotArea/BotArea";
-
-enum Bots {
-  Bot1 = "user1",
-  Bot2 = "user2",
-}
+import { Bots } from "@/modules/bot/interface";
 
 const MAX_NUMBER_OF_MESSAGES = 15;
 const NUMBER_OF_CHARS_READ_PER_SECOND = 33;
