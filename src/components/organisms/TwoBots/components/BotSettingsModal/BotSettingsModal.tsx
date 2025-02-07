@@ -92,7 +92,12 @@ export const BotSettingsModal = ({
                 onChange={updateMood}
                 label="Mood"
               />
-              <Button type="submit" variant="contained" color="primary">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{ width: 100 }}
+              >
                 Save
               </Button>
             </Stack>

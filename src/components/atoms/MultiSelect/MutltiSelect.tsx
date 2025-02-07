@@ -15,7 +15,7 @@ export const MultiSelect = ({
 }: MultiSelectProps) => {
   return (
     <TextField
-      style={{ width: "100%" }}
+      style={{ width: 250 }}
       variant="outlined"
       value={value}
       onChange={onChange}
