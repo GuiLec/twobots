@@ -75,7 +75,7 @@ export const BotSettingsModal = ({
         <Typography id="modal-description" sx={{ my: 1 }}>
           {`Here you can define `}
           <strong>{bot.name}</strong>
-          {`'s personality.`}
+          {`'s character.`}
         </Typography>
         <form onSubmit={handleSubmit}>
           <FormControl variant="outlined">
