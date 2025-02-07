@@ -1,4 +1,5 @@
 import { MultiSelect } from "@/components/atoms/MultiSelect/MutltiSelect";
+import { Bot } from "@/modules/bot/interface";
 import {
   Box,
   Button,
@@ -11,13 +12,13 @@ import {
 interface BotSettingsModalProps {
   open: boolean;
   handleClose: () => void;
-  botName: string;
+  bot: Bot;
 }
 
 export const BotSettingsModal = ({
   open,
   handleClose,
-  botName,
+  bot,
 }: BotSettingsModalProps) => {
   return (
     <Modal open={open} onClose={handleClose}>
@@ -39,11 +40,11 @@ export const BotSettingsModal = ({
           variant="h6"
           sx={{ fontWeight: "bold", color: "primary.main" }}
         >
-          {botName}
+          {bot.name}
         </Typography>
         <Typography id="modal-description" sx={{ my: 1 }}>
           {`Here you can define `}
-          <strong>{botName}</strong>
+          <strong>{bot.name}</strong>
           {`'s personality.`}
         </Typography>
         <form>

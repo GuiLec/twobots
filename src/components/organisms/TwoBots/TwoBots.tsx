@@ -5,6 +5,7 @@ import { postChat } from "@/modules/chat/postChat";
 import { ChatMessage } from "@/modules/chat/interface";
 import { BotArea } from "@/components/organisms/TwoBots/components/BotArea/BotArea";
 import { Bots } from "@/modules/bot/interface";
+import { bots } from "@/modules/bot/bots";
 
 const MAX_NUMBER_OF_MESSAGES = 15;
 const NUMBER_OF_CHARS_READ_PER_SECOND = 33;
@@ -121,12 +122,12 @@ export const TwoBots = () => {
         >
           <BotArea
             botMessage={bot1Message}
-            botName="Purple bot"
+            bot={bots[Bots.Bot1]}
             imageSrc="/bot1.png"
           />
           <BotArea
             botMessage={bot2Message}
-            botName="Cyan bot"
+            bot={bots[Bots.Bot2]}
             imageSrc="/bot2.png"
           />
         </Stack>

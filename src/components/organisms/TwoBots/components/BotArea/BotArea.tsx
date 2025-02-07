@@ -4,14 +4,15 @@ import Markdown from "react-markdown";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
 import { BotSettingsModal } from "@/components/organisms/TwoBots/components/BotSettingsModal/BotSettingsModal";
+import { Bot } from "@/modules/bot/interface";
 
 interface BotAreaProps {
   botMessage: string;
-  botName: string;
+  bot: Bot;
   imageSrc: string;
 }
 
-export const BotArea = ({ botMessage, botName, imageSrc }: BotAreaProps) => {
+export const BotArea = ({ botMessage, bot, imageSrc }: BotAreaProps) => {
   const [isModalOpen, setIsModal] = useState(false);
 
   const handleModalOpen = () => setIsModal(true);
@@ -24,7 +25,7 @@ export const BotArea = ({ botMessage, botName, imageSrc }: BotAreaProps) => {
           variant="h6"
           sx={{ fontWeight: "bold", color: "primary.main", paddingY: 1 }}
         >
-          {botName}
+          {bot.name}
         </Typography>
         <IconButton onClick={handleModalOpen}>
           <SettingsIcon />
@@ -45,7 +46,7 @@ export const BotArea = ({ botMessage, botName, imageSrc }: BotAreaProps) => {
       <BotSettingsModal
         open={isModalOpen}
         handleClose={handleModalClose}
-        botName={botName}
+        bot={bot}
       />
     </Box>
   );
