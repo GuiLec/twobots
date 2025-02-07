@@ -4,7 +4,7 @@ import { FormControl, TextField, Button, Stack, Box } from "@mui/material";
 import { postChat } from "@/modules/chat/postChat";
 import { ChatMessage } from "@/modules/chat/interface";
 import { BotArea } from "@/components/organisms/TwoBots/components/BotArea/BotArea";
-import { Bots } from "@/modules/bot/interface";
+import { Bot, Bots } from "@/modules/bot/interface";
 import { bots } from "@/modules/bot/bots";
 
 const MAX_NUMBER_OF_MESSAGES = 15;
@@ -20,6 +20,8 @@ export const TwoBots = () => {
   const [bot2Message, setBot2Message] = useState("");
   const [activeBot, setActiveBot] = useState<Bots>(Bots.Bot1);
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+  const [bot1, setBot1] = useState<Bot>(bots[Bots.Bot1]);
+  const [bot2, setBot2] = useState<Bot>(bots[Bots.Bot2]);
 
   const resetGame = () => {
     setPlayingState("stop");
@@ -103,7 +105,7 @@ export const TwoBots = () => {
             />
             <Box>
               <Button
-                disabled={inputValue === ""}
+                disabled={inputValue === "" && playingState === "stop"}
                 type="submit"
                 variant="contained"
                 color="primary"
@@ -113,25 +115,27 @@ export const TwoBots = () => {
             </Box>
           </Stack>
         </FormControl>
-        <Stack
-          spacing={2}
-          direction="row"
-          sx={{
-            paddingY: 2,
-          }}
-        >
-          <BotArea
-            botMessage={bot1Message}
-            bot={bots[Bots.Bot1]}
-            imageSrc="/bot1.png"
-          />
-          <BotArea
-            botMessage={bot2Message}
-            bot={bots[Bots.Bot2]}
-            imageSrc="/bot2.png"
-          />
-        </Stack>
       </form>
+      <Stack
+        spacing={2}
+        direction="row"
+        sx={{
+          paddingY: 2,
+        }}
+      >
+        <BotArea
+          botMessage={bot1Message}
+          bot={bot1}
+          imageSrc="/bot1.png"
+          updateBot={setBot1}
+        />
+        <BotArea
+          botMessage={bot2Message}
+          bot={bot2}
+          imageSrc="/bot2.png"
+          updateBot={setBot2}
+        />
+      </Stack>
     </Box>
   );
 };

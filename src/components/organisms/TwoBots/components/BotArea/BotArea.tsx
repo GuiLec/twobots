@@ -10,9 +10,15 @@ interface BotAreaProps {
   botMessage: string;
   bot: Bot;
   imageSrc: string;
+  updateBot: (bot: Bot) => void;
 }
 
-export const BotArea = ({ botMessage, bot, imageSrc }: BotAreaProps) => {
+export const BotArea = ({
+  botMessage,
+  bot,
+  imageSrc,
+  updateBot,
+}: BotAreaProps) => {
   const [isModalOpen, setIsModal] = useState(false);
 
   const handleModalOpen = () => setIsModal(true);
@@ -47,6 +53,7 @@ export const BotArea = ({ botMessage, bot, imageSrc }: BotAreaProps) => {
         open={isModalOpen}
         handleClose={handleModalClose}
         bot={bot}
+        updateBot={updateBot}
       />
     </Box>
   );

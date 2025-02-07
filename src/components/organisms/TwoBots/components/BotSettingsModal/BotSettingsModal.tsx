@@ -1,4 +1,5 @@
 import { MultiSelect } from "@/components/atoms/MultiSelect/MutltiSelect";
+import { personalityOptions } from "@/modules/bot/bots";
 import { Bot } from "@/modules/bot/interface";
 import {
   Box,
@@ -8,18 +9,36 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 interface BotSettingsModalProps {
   open: boolean;
   handleClose: () => void;
   bot: Bot;
+  updateBot: (bot: Bot) => void;
 }
 
 export const BotSettingsModal = ({
   open,
   handleClose,
   bot,
+  updateBot,
 }: BotSettingsModalProps) => {
+  const [settings, setSettings] = useState<{
+    personality: string;
+  }>({
+    personality: "",
+  });
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    updateBot({ ...bot, personality: settings.personality });
+    handleClose();
+  };
+
+  const updatePersonality = (e: ChangeEvent<HTMLInputElement>) => {
+    setSettings({ ...settings, personality: e.target.value });
+  };
   return (
     <Modal open={open} onClose={handleClose}>
       <Box
@@ -47,24 +66,16 @@ export const BotSettingsModal = ({
           <strong>{bot.name}</strong>
           {`'s personality.`}
         </Typography>
-        <form>
+        <form onSubmit={handleSubmit}>
           <FormControl variant="outlined">
             <Stack spacing={2} direction="column">
               <MultiSelect
-                options={[
-                  { value: "test", label: "Test 1" },
-                  { value: "test2", label: "Test 2" },
-                ]}
-                value="test"
-                onChange={(e) => console.log(e.target.value)}
-                label="Label"
+                options={personalityOptions}
+                value={settings.personality}
+                onChange={updatePersonality}
+                label="Personality"
               />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                onClick={handleClose}
-              >
+              <Button type="submit" variant="contained" color="primary">
                 Save
               </Button>
             </Stack>
