@@ -2,6 +2,8 @@ import { Box, IconButton, Stack, Typography } from "@mui/material";
 import styles from "./BotArea.module.css";
 import Markdown from "react-markdown";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { useState } from "react";
+import { BotSettingsModal } from "@/components/TwoBots/components/BotSettingsModal/BotSettingsModal";
 
 interface BotAreaProps {
   botMessage: string;
@@ -10,6 +12,10 @@ interface BotAreaProps {
 }
 
 export const BotArea = ({ botMessage, botName, imageSrc }: BotAreaProps) => {
+  const [isModalOpen, setIsModal] = useState(false);
+
+  const handleModalOpen = () => setIsModal(true);
+  const handleModalClose = () => setIsModal(false);
   return (
     <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <img src={imageSrc} alt="bot1" className={styles.botImage} />
@@ -20,7 +26,7 @@ export const BotArea = ({ botMessage, botName, imageSrc }: BotAreaProps) => {
         >
           {botName}
         </Typography>
-        <IconButton>
+        <IconButton onClick={handleModalOpen}>
           <SettingsIcon />
         </IconButton>
       </Stack>
@@ -36,6 +42,11 @@ export const BotArea = ({ botMessage, botName, imageSrc }: BotAreaProps) => {
       >
         <Markdown>{botMessage}</Markdown>
       </Typography>
+      <BotSettingsModal
+        open={isModalOpen}
+        handleClose={handleModalClose}
+        botName={botName}
+      />
     </Box>
   );
 };
