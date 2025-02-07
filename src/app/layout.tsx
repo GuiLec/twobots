@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { LanguageSelect } from "@/components/organisms/LanguageSelect/LanguageSelect";
 import { cookies } from "next/headers";
+import { Container } from "@mui/material";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,7 +43,9 @@ export default async function RootLayout({
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <LanguageSelect locale={localeCookie?.value} />
+          <Container>
+            <LanguageSelect locale={localeCookie?.value} />
+          </Container>
           {children}
         </NextIntlClientProvider>
       </body>
